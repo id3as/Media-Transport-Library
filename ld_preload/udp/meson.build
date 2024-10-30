@@ -10,7 +10,9 @@ udp_preload_c_args += ['-Wall']
 udp_preload_c_args += ['-Wunused-parameter']
 
 # simd build option, enable sse4.2 default, todo: do we need AVX2/AVX512 ?
-udp_preload_c_args += ['-msse4.2']
+if host_machine.cpu_family() == 'x86' or host_machine.cpu_family() == 'x86_64'
+  udp_preload_c_args += ['-msse4.2']
+endif
 
 udp_preload_ld_args = []
 
