@@ -71,7 +71,9 @@ if is_windows
 endif
 
 # simd build option, enable sse4.2 default, todo: do we need AVX2/AVX512 for app ?
-app_c_args += ['-msse4.2']
+if host_machine.cpu_family() == 'x86' or host_machine.cpu_family() == 'x86_64'
+  app_c_args += ['-msse4.2']
+endif
 
 if is_windows
   ws2_32_dep = cc.find_library('ws2_32', required: true)

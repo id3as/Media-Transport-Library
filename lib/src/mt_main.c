@@ -3,6 +3,7 @@
  */
 
 #include "mt_main.h"
+#include <rte_cpuflags.h>
 
 #include "datapath/mt_queue.h"
 #include "dev/mt_dev.h"
@@ -1248,6 +1249,12 @@ int mtl_port_ip_info(mtl_handle mt, enum mtl_port port, uint8_t ip[MTL_IP_ADDR_L
   return 0;
 }
 
+#if defined(__aarch64__)
+enum mtl_simd_level mtl_get_simd_level(void) {
+  // TODO - other simd levels exist...
+  return MTL_SIMD_LEVEL_NONE;
+}
+#else
 enum mtl_simd_level mtl_get_simd_level(void) {
   if (rte_cpu_get_flag_enabled(RTE_CPUFLAG_AVX512VBMI2))
     return MTL_SIMD_LEVEL_AVX512_VBMI2;
@@ -1256,6 +1263,7 @@ enum mtl_simd_level mtl_get_simd_level(void) {
   /* no simd */
   return MTL_SIMD_LEVEL_NONE;
 }
+#endif
 
 static const char* mt_simd_level_names[MTL_SIMD_LEVEL_MAX] = {
     "none",
