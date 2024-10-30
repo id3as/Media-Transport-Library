@@ -101,7 +101,9 @@ mtl_c_args += ['-Wall']
 mtl_c_args += ['-Wunused-parameter']
 
 #simd build option, enable sse4.2 default
-mtl_c_args += ['-msse4.2']
+if host_machine.cpu_family() == 'x86' or host_machine.cpu_family() == 'x86_64'
+  mtl_c_args += ['-msse4.2']
+endif
 
 # default no asan dep
 asan_dep = []

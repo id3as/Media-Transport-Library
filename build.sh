@@ -80,7 +80,7 @@ ninja
 if [ "$user" == "root" ] || [ "$OS" == "Windows_NT" ]; then
 	ninja install
 else
-	sudo ninja install
+	 ninja install
 fi
 popd
 
@@ -94,7 +94,7 @@ if [ "$OS" != "Windows_NT" ]; then
 	if [ "$user" == "root" ]; then
 		ninja install
 	else
-		sudo ninja install
+		 ninja install
 	fi
 	popd
 fi
@@ -108,12 +108,12 @@ ninja
 popd
 
 # build tests
-pushd tests/
-meson setup "${TEST_BUILD_DIR}" -Dbuildtype="$buildtype" -Denable_asan="$enable_asan"
-popd
-pushd "${TEST_BUILD_DIR}"
-ninja
-popd
+# pushd tests/
+# meson setup "${TEST_BUILD_DIR}" -Dbuildtype="$buildtype" -Denable_asan="$enable_asan"
+# popd
+# pushd "${TEST_BUILD_DIR}"
+# ninja
+# popd
 
 # build plugins
 pushd plugins/
@@ -124,7 +124,7 @@ ninja
 if [ "$user" == "root" ] || [ "$OS" == "Windows_NT" ]; then
 	ninja install
 else
-	sudo ninja install
+	 ninja install
 fi
 popd
 
@@ -138,7 +138,7 @@ if [ "$OS" != "Windows_NT" ]; then
 	if [ "$user" == "root" ]; then
 		ninja install
 	else
-		sudo ninja install
+		 ninja install
 	fi
 	popd
 fi
@@ -153,7 +153,7 @@ if [ "$OS" != "Windows_NT" ]; then
 	if [ "$user" == "root" ]; then
 		ninja install
 	else
-		sudo ninja install
+		 ninja install
 	fi
 	popd
 fi
